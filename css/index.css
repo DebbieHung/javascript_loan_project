@@ -61,3 +61,12 @@ select{
     border-radius: 6px;
     text-align: center;
 }
+
+#result{
+    display: none;
+    width: 350px;
+    margin: 16px auto;
+    background-color: #6DA4AA;
+    padding: 12px;
+    border-radius: 6px;
+}
