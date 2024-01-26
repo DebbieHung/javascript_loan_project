@@ -7,11 +7,14 @@ const feeEl = document.querySelector("#fee");
 const payment1El = document.querySelector("#payment1");
 const payment2El = document.querySelector("#payment2");
 const calcEl = document.querySelector("#calc");
+const resetEl = document.querySelector("#reset");
+const resultEl = document.querySelector("#result");
 
 console.log(calcEl, amountEl, yearsEl, rateEl, payment1El, payment2El, feeEl);
 
 // 監聽動作，此處監聽滑鼠click
 calcEl.addEventListener("click", calcLoan);
+resetEl.addEventListener("click", resetLoan);
 
 function calcLoan() {
     let amount = amountEl.value * 10000;
@@ -32,10 +35,16 @@ function calcLoan() {
 
     document.querySelector(".totalAmount").innerText = totalAmount + "元" + (fee == 0 ? "" : "(含手續費)");
     document.querySelector(".totalInterest").innerText = totalInterest + "元";
-    const resultEl = document.querySelector("#result");
     resultEl.style.display = "none";
     setTimeout(function () { resultEl.style.display = "block"; }, 500)
 
 
     console.log(amount, years, rate, fee, rule, totalInterest, totalAmount);
+}
+
+function resetLoan() {
+    amountEl.value = "";
+    rateEl.value = "";
+    yearsEl.value = "";
+    resultEl.style.display = "none";
 }
