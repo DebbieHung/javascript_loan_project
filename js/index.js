@@ -9,8 +9,9 @@ const payment2El = document.querySelector("#payment2");
 const calcEl = document.querySelector("#calc");
 const resetEl = document.querySelector("#reset");
 const resultEl = document.querySelector("#result");
+const tableEl = document.querySelector('#table');
 
-console.log(calcEl, amountEl, yearsEl, rateEl, payment1El, payment2El, feeEl);
+console.log(tableEl, calcEl, amountEl, yearsEl, rateEl, payment1El, payment2El, feeEl);
 
 // 監聽動作，此處監聽滑鼠click
 calcEl.addEventListener("click", calcLoan);
@@ -19,7 +20,7 @@ resetEl.addEventListener("click", resetLoan);
 function calcLoan() {
     let amount = amountEl.value * 10000;
     let years = yearsEl.value;
-    let rate = rateEl.value / 100;
+    let rate = rateEl.value;
     // let fee = 0;
     // if (feeEl.checked) {
     //     fee = 5000;
@@ -28,18 +29,25 @@ function calcLoan() {
     let fee = feeEl.checked ? 5000 : 0;
     // 取得不同計算方法
     let rule = payment1El.checked ? 1 : 2;
-    // 利息
-    let totalInterest = amount * rate * years;
-    // 總金額
+
+    let result;
+    if (rule == 1) {
+        result = rule1(amount, years, rate);
+        console.log(result);
+    } else {
+        alert("功能製作中....");
+        return;
+    }
+    let totalInterest = result[1];
     let totalAmount = amount + totalInterest + fee;
+    console.log(amount, years, rate, fee, rule, totalInterest, totalAmount);
 
     document.querySelector(".totalAmount").innerText = totalAmount + "元" + (fee == 0 ? "" : "(含手續費)");
     document.querySelector(".totalInterest").innerText = totalInterest + "元";
     resultEl.style.display = "none";
-    setTimeout(function () { resultEl.style.display = "block"; }, 500)
+    setTimeout(function () { resultEl.style.display = "block"; }, 500);
 
-
-    console.log(amount, years, rate, fee, rule, totalInterest, totalAmount);
+    drawTable(result[0]);
 }
 
 function resetLoan() {
@@ -47,4 +55,40 @@ function resetLoan() {
     rateEl.value = "";
     yearsEl.value = "";
     resultEl.style.display = "none";
+    tableEl.innerHTML = "";
 }
+
+function rule1(totalAmount, years, rate) {
+    let amount = totalAmount;
+    let period = years * 12;
+    let month_pay = parseInt(amount / period);
+    let month_rate = rate / 100 / 12;
+
+    let totalInterest = 0;
+    let datas = [];
+    for (let i = 0; i < period; i++) {
+        interest = Math.round(amount * month_rate);
+        amount -= month_pay;
+        if (i == period - 1) {
+            datas.push([i + 1, month_pay + amount, interest, month_pay + amount + interest, 0]);
+        }
+        else {
+            datas.push([i + 1, month_pay, interest, month_pay + interest, amount]);
+        }
+        totalInterest += interest;
+    }
+    // console.log(datas);
+    return [datas, totalInterest];
+}
+
+function drawTable(datas) {
+    let tableStr = "<ul>";
+    for (let i = 0; i < datas.length; i++) {
+        console.log(datas[i].join(","));
+        tableStr += `<li>${datas[i].join(",")}</li>`;
+    }
+    tableStr += "</ul>";
+    console.log(tableStr);
+    tableEl.innerHTML = tableStr;
+}
+
