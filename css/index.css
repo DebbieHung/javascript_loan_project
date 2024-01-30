@@ -1,16 +1,16 @@
-body{
-    background-color:#607274;
+body {
+    background-color: #607274;
 }
 
-#container{
+#container {
     text-align: center;
 }
 
-.title{
+.title {
     color: #F3D7CA;
 }
 
-form{
+form {
     width: 350px;
     margin: 0 auto;
     padding: 12px;
@@ -19,13 +19,13 @@ form{
     text-align: center;
 }
 
-#info{
+#info {
     display: inline-block;
     margin: 12px auto;
     text-align: left;
 }
 
-button{
+button {
     width: 80px;
     border: 0px;
     height: 24px;
@@ -35,38 +35,61 @@ button{
     font-size: 16px;
 }
 
-#reset{
+#reset {
     background-color: #FF6868;
     color: white;
 }
 
-input{
+input {
     text-align: center;
     font-size: 14px;
     margin: 6px;
 }
 
-label{
+label {
     font-weight: bold;
 }
 
-select{
+select {
     font-size: 14px;
     text-align: center;
     width: 180px;
 }
 
-#calcrule{
+#calcrule {
     background-color: #FFC0D9;
     border-radius: 6px;
     text-align: center;
 }
 
-#result{
+#result {
     display: none;
     width: 350px;
     margin: 16px auto;
     background-color: #6DA4AA;
     padding: 12px;
     border-radius: 6px;
+}
+
+table {
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid black;
+    border-collapse: collapse;
+    background-color: aliceblue;
+}
+
+thead th {
+    background-color: #FF6868;
+    border: 1px solid #FFC0D9;
+    font-size: 18px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #F3D7CA;
+}
+
+td {
+    border: 1px solid #6DA4AA;
+    padding: 3px;
 }
