@@ -1,5 +1,5 @@
 body {
-    background-color: #607274;
+    background-image: url("../image/christine-roy-ir5MHI6rPg0-unsplash.jpg");
 }
 
 #container {
@@ -7,7 +7,7 @@ body {
 }
 
 .title {
-    color: #F3D7CA;
+    color: whitesmoke;
 }
 
 form {
@@ -15,7 +15,7 @@ form {
     margin: 0 auto;
     padding: 12px;
     border-radius: 12px;
-    background-color: blanchedalmond;
+    background-color: #f3d2a9;
     text-align: center;
 }
 
@@ -57,7 +57,7 @@ select {
 }
 
 #calcrule {
-    background-color: #FFC0D9;
+    background-color: #ebb0be;
     border-radius: 6px;
     text-align: center;
 }
@@ -66,9 +66,14 @@ select {
     display: none;
     width: 350px;
     margin: 16px auto;
-    background-color: #6DA4AA;
+    background-color: #638889;
     padding: 12px;
     border-radius: 6px;
+    font-size: 16px;
+}
+
+#table {
+    display: none;
 }
 
 table {
@@ -76,17 +81,18 @@ table {
     margin: 0 auto;
     border: 1px solid black;
     border-collapse: collapse;
-    background-color: aliceblue;
+    background-color: #E5E1DA;
 }
 
 thead th {
-    background-color: #FF6868;
-    border: 1px solid #FFC0D9;
+    background-color: #365486;
+    border: 1px solid #6DA4AA;
     font-size: 18px;
+    color: white;
 }
 
 tbody tr:nth-child(even) {
-    background-color: #F3D7CA;
+    background-color: #9DBC98;
 }
 
 td {

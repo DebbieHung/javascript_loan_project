@@ -9,6 +9,7 @@ const payment2El = document.querySelector("#payment2");
 const calcEl = document.querySelector("#calc");
 const resetEl = document.querySelector("#reset");
 const resultEl = document.querySelector("#result");
+const tableallEl = document.querySelector("#table");
 const tableEl = document.querySelector("#table tbody");
 
 console.log(tableEl, calcEl, amountEl, yearsEl, rateEl, payment1El, payment2El, feeEl);
@@ -31,15 +32,21 @@ function calcLoan() {
     let rule = payment1El.checked ? 1 : 2;
 
     let result;
+    let totalInterest;
+    let totalAmount;
     if (rule == 1) {
         result = rule1(amount, years, rate);
         console.log(result);
+        totalInterest = result[1];
+        totalAmount = amount + totalInterest + fee;
+
     } else {
-        alert("功能製作中....");
-        return;
+        result = rule2(amount, years, rate);
+        console.log(result);
+        totalInterest = result[1];
+        totalAmount = result[2] + fee;
     }
-    let totalInterest = result[1];
-    let totalAmount = amount + totalInterest + fee;
+
     console.log(amount, years, rate, fee, rule, totalInterest, totalAmount);
 
     document.querySelector(".totalAmount").innerText = totalAmount + "元" + (fee == 0 ? "" : "(含手續費)");
@@ -56,6 +63,7 @@ function resetLoan() {
     yearsEl.value = "";
     resultEl.style.display = "none";
     tableEl.innerHTML = "";
+    tableallEl.style.display = "none";
 }
 
 function rule1(totalAmount, years, rate) {
@@ -91,6 +99,9 @@ function drawTable(datas) {
         tableStr += "</tr>";
     }
     tableEl.innerHTML = tableStr;
+    tableallEl.style.display = "none";
+    setTimeout(function () { tableallEl.style.display = "block"; }, 500);
+
 
     // let tableStr = "<ul>";
     // for (let i = 0; i < datas.length; i++) {
@@ -101,5 +112,31 @@ function drawTable(datas) {
     // console.log(tableStr);
     // tableEl.innerHTML = tableStr;
 
+}
+
+function rule2(totalAmount, years, rate) {
+    let amount = totalAmount;
+    let period = years * 12;
+    let month_rate = rate / 100 / 12;
+    let mean_rate = (((1 + month_rate) ** period) * month_rate) / (((1 + month_rate) ** period) - 1);
+
+    let totalInterest = 0;
+    let datas = [];
+    for (let i = 0; i < period; i++) {
+        interest = Math.round(amount * month_rate)
+        totalmonth_pay = Math.round(totalAmount * mean_rate)
+        month_pay = totalmonth_pay - interest
+        amount -= month_pay
+        if (i == period - 1) {
+            datas.push([i + 1, month_pay, interest, totalmonth_pay, 0]);
+        }
+        else {
+            datas.push([i + 1, month_pay, interest, totalmonth_pay, amount]);
+        }
+
+        totalInterest += interest;
+    }
+    console.log(datas);
+    return [datas, totalInterest, totalmonth_pay * period];
 }
 
