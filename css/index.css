@@ -1,6 +1,6 @@
 body {
-    background-image: url("../image/2christine-roy-ir5MHI6rPg0-unsplash.jpg");
-
+    background-image: url("../image/henry-be-lc7xcWebECc-unsplash.jpg");
+    background-size: cover;
 }
 
 #container {
@@ -66,8 +66,8 @@ select {
 #result {
     display: none;
     width: 350px;
-    margin: 16px auto;
-    background-color: #638889;
+    margin: 12px auto;
+    background-color: #365486;
     padding: 12px;
     border-radius: 6px;
     font-size: 16px;
@@ -99,4 +99,18 @@ tbody tr:nth-child(even) {
 td {
     border: 1px solid #6DA4AA;
     padding: 3px;
+}
+
+#discription {
+    background-image: url("../image/jess-bailey-kfDHPpCQEBQ-unsplash.jpg");
+    background-size: cover;
+    width: 450px;
+    margin: 12px auto;
+    font-size: 16px;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+#example2 {
+    display: none;
 }

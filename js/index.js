@@ -11,12 +11,18 @@ const resetEl = document.querySelector("#reset");
 const resultEl = document.querySelector("#result");
 const tableallEl = document.querySelector("#table");
 const tableEl = document.querySelector("#table tbody");
+const example1El = document.querySelector("#example1");
+const example2El = document.querySelector("#example2");
 
-console.log(tableEl, calcEl, amountEl, yearsEl, rateEl, payment1El, payment2El, feeEl);
+console.log(example1El, example2El, tableEl, calcEl, amountEl, yearsEl, rateEl, payment1El, payment2El, feeEl);
 
 // 監聽動作，此處監聽滑鼠click
 calcEl.addEventListener("click", calcLoan);
 resetEl.addEventListener("click", resetLoan);
+payment1El.addEventListener("click", showExample);
+payment2El.addEventListener("click", showExample);
+
+
 
 function calcLoan() {
     let amount = amountEl.value * 10000;
@@ -64,6 +70,7 @@ function resetLoan() {
     resultEl.style.display = "none";
     tableEl.innerHTML = "";
     tableallEl.style.display = "none";
+
 }
 
 function rule1(totalAmount, years, rate) {
@@ -140,3 +147,14 @@ function rule2(totalAmount, years, rate) {
     return [datas, totalInterest, totalmonth_pay * period];
 }
 
+function showExample() {
+    let rule = payment1El.checked ? 1 : 2;
+    if (rule == 1) {
+        example1El.style.display = "block";
+        example2El.style.display = "none";
+    } else {
+        example2El.style.display = "block";
+        example1El.style.display = "none";
+    }
+
+}
